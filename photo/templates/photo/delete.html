@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}- Delete{% endblock %}
+
+{% block content %}
+    <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 panel panel-default">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="alert alert-danger">Do you want to delete {{object}}?</div>
+                    <input type="submit" value="DELETE" class="btn btn-danger">
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+    </div>
+
+{% endblock %}

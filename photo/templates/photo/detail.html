@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}- List{% endblock %}
+
+{% block content %}
+    <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 panel panel-default">
+                <p><img src="{{object.image.url}}" style="width:100%;"></p>
+                <button type="button" class="btn btn-xs btn-info">
+                    {{object.author.username}}</button>
+                <p>{{object.text|linebreaksbr}}</p>
+                {% load tagging_tags %}
+                {% tags_for_object object as tags %}
+                {% if tags %}
+                <p>
+                    Tags :
+                    {% for tag in tags %}
+                        <a href="{% url 'photo:tagged_photo_list' tag.name %}">#{{tag.name}}</a>
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <p>
+                    <a href="{% url 'photo:photo_update' pk=object.id %}" class="btn btn-outline-warning btn-sm">UPDATE</a>
+                    <a href="{% url 'photo:photo_delete' pk=object.id %}" class="btn btn-outline-danger btn-sm">DELETE</a>
+                </p>
+            </div>
+
+            <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 panel panel-default">
+                {% load disqus_tags %}
+                {% disqus_show_comments %}
+            </div>
+        <div class="col-md-2"></div>
+    </div>
+{% endblock %}
